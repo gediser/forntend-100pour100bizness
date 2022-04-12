@@ -36,10 +36,10 @@ const store = createStore({
                     commit('setPublicationsLoading', false)
                 })
         },
-        getSurvey({commit}, id){
+        getPublication({commit}, id){
             commit("setCurrentPublicationLoading", true);
             return axiosClient
-                    .get(`/publications/${id}`)
+                    .get(`/publication/${id}`)
                     .then((res) => {
                         commit("setCurrentPublication", res.data);
                         commit("setCurrentPublicationLoading", false);
@@ -68,6 +68,9 @@ const store = createStore({
                             });
             }
             return response;
+        },
+        deletePublication({commit}, id){
+            return axiosClient.delete(`/publication/${id}`);
         },
         register({ commit }, user){
             return axiosClient.post('/register', user)

@@ -38,6 +38,7 @@
             <label for="password_confirmation" class="sr-only">Confirmation mot de passe</label>
             <input v-model="user.password_confirmation" id="password_confirmation" name="password_confirmation" type="password" autocomplete="current-password_confirmation" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Confirmation mot de passe" />
           </div>
+          <div><small>Le mot de passe doit contenir au moins une lettre <span class="font-bold">majuscule</span>, une lettre <span class="font-bold">minuscule</span>, un <span class="font-bold">chiffre</span> et un <span class="font-bold">symbole</span>.</small></div>
         </div>
 
         <div>

@@ -98,7 +98,7 @@ import Notification from './Notification.vue'
 
 const navigation = [
   { name: 'Dashboard', to: {name: "Dashboard"} },
-  { name: 'Publications', to: {name: "Publications"} },
+  { name: 'Mes publications', to: {name: "Publications"} },
 ]
 
 export default {

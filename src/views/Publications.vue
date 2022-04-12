@@ -69,7 +69,7 @@ const publications = computed(() => store.state.publications)
 store.dispatch('getPublications')
 
 function deletePublication(survey){
-    if (confirm(`Are you sure you want to  delete this survey? Operation can't be undone!!`)){
+    if (confirm(`Etes vous sur de vouloir supprimer cette publication? Operation irreversible!!`)){
         // delete survey
         store.dispatch("deletePublication", survey.id)
             .then(() => {

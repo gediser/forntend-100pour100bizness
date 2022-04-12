@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router"
 import  Dashboard from '../views/Dashboard.vue'
-import  Surveys from '../views/Surveys.vue'
+import  Publications from '../views/Publications.vue'
+import PublicationView from '../views/PublicationView.vue'
 import  Login from '../views/Login.vue'
 import  Register from '../views/Register.vue'
 import  DefaultLayout from '../components/DefaultLayout.vue'
@@ -22,9 +23,19 @@ const routes = [
                 component: Dashboard
             },
             { 
-                path: '/surveys',
-                name: 'Surveys',
-                component: Surveys
+                path: '/publications',
+                name: 'Publications',
+                component: Publications
+            },
+            { 
+                path: '/publications/create',
+                name: 'PublicationCreate',
+                component: PublicationView
+            },
+            { 
+                path: '/publications/:id',
+                name: 'PublicationView',
+                component: PublicationView
             }
         ]
     },

@@ -8,8 +8,13 @@ const store = createStore({
             token: sessionStorage.getItem('TOKEN'),
         },
         currentPublication:{
-            loading: false,
+            loading: true,
             data: {}
+        },
+        publicPublications: {
+            loading:true,
+            data: [],
+            links:[]
         },
         publications: {
             loading: true,
@@ -24,6 +29,19 @@ const store = createStore({
     },
     getters: {},
     actions: {
+        getPublicPublications({commit}, {url = null} = {}){
+            url = url || 'view/publication'
+            commit("setPublicPublicationsLoading", true)
+            return axiosClient.get(url)
+                .then((res) => {
+                    commit('setPublicPublicationsLoading', false)
+                    commit('setPublicPublicationsData', res.data)
+                    return data
+                })
+                .catch((err) => {
+                    commit('setPublicPublicationsLoading', false)
+                })
+        },
         getPublications({commit}, {url = null} = {}){
             url = url || '/publication'
             commit("setPublicationsLoading", true)
@@ -99,10 +117,16 @@ const store = createStore({
         setPublicationsLoading: (state, loading) => {
             state.publications.loading = loading
         },
-        setPublicationsData: (state, data) => {
-            console.log("my data", data)
-            state.publications.data = data.data
-            state.publications.links = data.meta.links
+        setPublicationsData: (state, publications) => {
+            state.publications.data = publications.data
+            state.publications.links = publications.meta.links
+        },
+        setPublicPublicationsLoading: (state, loading) => {
+            state.publicPublications.loading = loading
+        },
+        setPublicPublicationsData: (state, publications) => {
+            state.publicPublications.data = publications.data
+            state.publicPublications.links = publications.meta.links
         },
         setCurrentPublicationLoading:(state, loading) => {
             state.currentPublication.loading = loading

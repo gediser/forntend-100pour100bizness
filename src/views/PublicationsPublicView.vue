@@ -1,17 +1,9 @@
 <template>
-    <page-component>
+<page-component>
         <template v-slot:header>
             <div class="flex justify-between items-center">
                 <h1 class="text-3xl font-bold text-gray-900">Publications</h1>
-                <router-link
-                    :to="{name: 'PublicationCreate'}"
-                    class="py-2 px-3 text-white bg-emerald-500 rounded-md hover:bg-emerald-600"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 -mt-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                    </svg>
-                    Ajouter 
-                </router-link>
+                
             </div>
         </template>
 
@@ -23,7 +15,7 @@
                     v-for="(pub, ind) in publications.data"
                     :key="pub.id"
                     :publication="pub"
-                    :publique="false"
+                    :publique="true"
                     class="opacity-0 animate-fade-in-down"
                     :style="{animationDelay: `${ind*0.1}s`}"
                     @delete="deletePublication(pub)"
@@ -57,6 +49,7 @@
             </div>
         </div>
     </page-component>
+  
 </template>
 
 <script setup>
@@ -65,28 +58,18 @@ import {computed} from "vue"
 import PageComponent from "../components/PageComponent.vue"
 import PublicationListItem from "../components/PublicationListItem.vue"
 
-const publications = computed(() => store.state.publications)
-store.dispatch('getPublications')
-
-function deletePublication(publication){
-    if (confirm(`Etes vous sur de vouloir supprimer cette publication? Operation irreversible!!`)){
-        // delete survey
-        store.dispatch("deletePublication", publication.id)
-            .then(() => {
-                store.dispatch('getPublications')
-            })
-    }
-}
+const publications = computed(() => store.state.publicPublications)
+store.dispatch('getPublicPublications')
 
 function getForPage(event, link){
     event.preventDefault();
     if (!link.url || link.active){
         return;
     }
-    store.dispatch("getPublications", { url: link.url })
+    store.dispatch("getPublicPublications", { url: link.url })
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>

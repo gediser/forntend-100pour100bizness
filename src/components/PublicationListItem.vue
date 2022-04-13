@@ -4,7 +4,7 @@
     >
         <img :src="publication.image_url" alt="" class="w-full h-48 object-cover" />
         <div v-html="publication.description" class="overflow-hidden flex-1"></div>
-        <div class="flex justify-between items-center mt-3">
+        <div v-if="!publique" class="flex justify-between items-center mt-3">
             <router-link
                 :to="{name: 'PublicationView', params: {id: publication.id}}"
                 class="flex py-2 px-4 border border-transparent text-sm rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -33,7 +33,8 @@
 <script setup>
 
 const {survey} = defineProps({
-    publication: Object
+    publication: Object,
+    publique: Boolean
 })
 
 const emit = defineEmits(['delete'])

@@ -47,7 +47,7 @@
                                 ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
                                 : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50',
                             i===0 ? 'rounded-l-md' : '',
-                            i===surveys.links.length-1 ? 'rounded-r-md' : ''
+                            i===publications.links.length-1 ? 'rounded-r-md' : ''
                         ]"
                     >
 
@@ -65,13 +65,12 @@ import PageComponent from "../components/PageComponent.vue"
 import PublicationListItem from "../components/PublicationListItem.vue"
 
 const publications = computed(() => store.state.publications)
-
 store.dispatch('getPublications')
 
-function deletePublication(survey){
+function deletePublication(publication){
     if (confirm(`Etes vous sur de vouloir supprimer cette publication? Operation irreversible!!`)){
         // delete survey
-        store.dispatch("deletePublication", survey.id)
+        store.dispatch("deletePublication", publication.id)
             .then(() => {
                 store.dispatch('getPublications')
             })

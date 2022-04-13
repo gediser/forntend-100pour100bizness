@@ -13,7 +13,8 @@ const store = createStore({
         },
         publications: {
             loading: true,
-            data:[]
+            data:[],
+            links:[]
         },
         notification: {
             show: false,
@@ -99,7 +100,9 @@ const store = createStore({
             state.publications.loading = loading
         },
         setPublicationsData: (state, data) => {
+            console.log("my data", data)
             state.publications.data = data.data
+            state.publications.links = data.meta.links
         },
         setCurrentPublicationLoading:(state, loading) => {
             state.currentPublication.loading = loading

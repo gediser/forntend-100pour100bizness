@@ -91,7 +91,6 @@ function login(ev){
     })
     .catch(err => {
       loading.value = false;
-      console.log("mon erreur 422", err.response)
       if (err.response.status === 422){
         errors.value = err.response.data.errors
       }

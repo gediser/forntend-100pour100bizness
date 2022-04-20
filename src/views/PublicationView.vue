@@ -152,7 +152,7 @@ function savePublication(){
     store.dispatch("savePublication", model.value).then(({ data }) => {
             store.commit('notify', {
                 type: 'success',
-                message: 'Survey was successfully updated'
+                message: 'La publication a bien ete sauvegardee.'
             })
             router.push({
                 name: "PublicationView",

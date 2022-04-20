@@ -91,6 +91,13 @@ const store = createStore({
         deletePublication({commit}, id){
             return axiosClient.delete(`/publication/${id}`);
         },
+        updateProfil({ commit }, user){
+            console.log('i am updating the profile')
+            return axiosClient.post('/update-profil', user)
+                .then(({data}) => {
+                    return data
+                })
+        },
         register({ commit }, user){
             return axiosClient.post('/register', user)
                 .then(({data}) => {

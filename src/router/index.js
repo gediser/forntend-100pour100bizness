@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router"
 import  Dashboard from '../views/Dashboard.vue'
 import  Publications from '../views/Publications.vue'
 import PublicationView from '../views/PublicationView.vue'
+import ProfilView from '../views/ProfilView.vue'
 import PublicationsPublicView from '../views/PublicationsPublicView.vue'
 import  Login from '../views/Login.vue'
 import  Register from '../views/Register.vue'
@@ -42,6 +43,11 @@ const routes = [
                 path: '/publications/:id',
                 name: 'PublicationView',
                 component: PublicationView
+            },
+            { 
+                path: '/profil',
+                name: 'ProfilView',
+                component: ProfilView
             }
         ]
     },
@@ -77,7 +83,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     if (to.meta.requireAuth && !store.state.user.token){
         next({name: 'Login'})
-    } else if (store.state.user.token && !to.meta.isGuest){
+    } else if (store.state.user.token && to.meta.isGuest){
         next({name: 'Dashboard'})
     }
     else {

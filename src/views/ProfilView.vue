@@ -5,13 +5,21 @@
                 <h1 class="text-3xl font-bold text-gray-900">
                     {{ user.id ? `Utilisateur ${user.id}` : 'Utilisateur'}}
                 </h1>
-
-                
             </div>
 
         </template>
 
          <form @submit.prevent="saveProfil" autocomplete="none" class="animate-fade-in-down">
+            <Alert
+                v-if="Object.keys(errors).length"
+                class="flex-col items-stretch text-sm"
+            >
+                <div v-for="(field, i) of Object.keys(errors)" :key="i">
+                    <div v-for="(error, ind) of errors[field] ||  []" :key="ind">
+                    * {{ error }}
+                    </div>
+                </div>
+            </Alert>
             <div class="shadow sm:rounded-md sm:overflow-hidden">
                 <!-- Survey Fields -->
                 <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
@@ -104,14 +112,27 @@
 <script setup>
 import PageComponent from '../components/PageComponent.vue'
 import store from '../store'
+import Alert from '../components/Alert.vue'
 import {computed, ref} from 'vue'
 
 const user = store.state.user.data;
+
+user.password_confirmation = ''
+user.password = ''
 
 let modifier = ref(false)
 let errors = ref({})
 
 function saveProfil(){
+    errors.value = {}
+    if (user.password !== user.password_confirmation){
+        errors.value = {
+            error:{
+                error: "The passwords are different."
+            }
+        }
+        return
+    }
     store
     .dispatch('updateProfil', user)
     .then((res) => {

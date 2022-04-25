@@ -20,7 +20,7 @@
             </div>
         </template>
 
-        <div v-if="publicationLoading" class="flex justify-center">Loding...</div>
+        <div v-if="publicationLoading" class="flex justify-center">Loading...</div>
 
         <form v-else @submit.prevent="savePublication" class="animate-fade-in-down">
             <div class="shadow sm:rounded-md sm:overflow-hidden">
@@ -132,6 +132,9 @@ const publicationLoading = computed(() => store.state.currentPublication.loading
 if (route.params.id){
        store.dispatch('getPublication', route.params.id);
     }
+else{
+    store.commit("setCurrentPublicationLoading", false)
+}
 
 
 function onImageChoose(ev){

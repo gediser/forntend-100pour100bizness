@@ -1,5 +1,5 @@
 <template>
-<page-component>
+    <page-component>
         <template v-slot:header>
             <div class="flex justify-between items-center">
                 <h1 class="text-3xl font-bold text-gray-900">Publications</h1>
@@ -48,8 +48,10 @@
                 </nav>
             </div>
         </div>
+        
     </page-component>
-  
+    <user-details-pop-up></user-details-pop-up>
+
 </template>
 
 <script setup>
@@ -57,6 +59,7 @@ import store from "../store"
 import {computed} from "vue"
 import PageComponent from "../components/PageComponent.vue"
 import PublicationListItem from "../components/PublicationListItem.vue"
+import UserDetailsPopUp from '../components/UserDetailsPopUp.vue'
 
 const publications = computed(() => store.state.publicPublications)
 store.dispatch('getPublicPublications')

@@ -2,6 +2,7 @@
     <div 
         class="flex flex-col py-4 px-6 shadow-md bg-white hover:bg-gray-50 h-[470px]"
     >
+        <p @click="showDetails(publication.user)" class="cursor-pointer font-bold text-indigo-600 hover:text-indigo-700 py-2">{{ publication.user.name }}</p>
         <img :src="publication.image_url" alt="" class="w-full h-48 object-cover" />
         <div v-html="publication.description" class="overflow-hidden flex-1"></div>
         <div v-if="!publique" class="flex justify-between items-center mt-3">
@@ -32,12 +33,19 @@
 
 <script setup>
 
+import store from '../store';
+
 const {survey} = defineProps({
     publication: Object,
     publique: Boolean
 })
 
 const emit = defineEmits(['delete'])
+
+function showDetails(user){
+    console.log("utillisateur", user)
+   store.commit("showUserDetailsPopUp", user)
+}
 
 </script>
 

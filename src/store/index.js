@@ -25,6 +25,14 @@ const store = createStore({
             show: false,
             type: null,
             message: null
+        },
+        userDetailsPopUp:{
+            show: false,
+            data: {
+                name: '',
+                email: '',
+                telephone: ''
+            }
         }
     },
     getters: {},
@@ -157,6 +165,16 @@ const store = createStore({
             setTimeout(()=>{
                 state.notification.show = false;
             }, 3000)
+        },
+        showUserDetailsPopUp: (state, {name, email, telephone}) =>{
+            console.log("show user", name, email, telephone)
+            state.userDetailsPopUp.data.name = name;
+            state.userDetailsPopUp.data.email = email;
+            state.userDetailsPopUp.data.telephone = telephone
+            state.userDetailsPopUp.show = true
+        },
+        closeUserDetailsPopUp: (state) =>{
+            state.userDetailsPopUp.show = false
         }
     },
     modules: {}

@@ -102,6 +102,7 @@ import Notification from './Notification.vue'
 
 const navigation = [
   { name: 'Publications', to: {name: "PublicationsPublicView"}, target: true },
+  { name: 'Produits', to: {name: "ProductsPublicView"}, target: true },
 ]
 
 export default {

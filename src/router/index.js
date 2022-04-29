@@ -1,9 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router"
 import  Dashboard from '../views/Dashboard.vue'
 import  Publications from '../views/Publications.vue'
+import  Products from '../views/Products.vue'
 import PublicationView from '../views/PublicationView.vue'
+import ProductView from '../views/ProductView.vue'
 import ProfilView from '../views/ProfilView.vue'
 import PublicationsPublicView from '../views/PublicationsPublicView.vue'
+import ProductsPublicView from '../views/ProductsPublicView.vue'
 import  Login from '../views/Login.vue'
 import  Register from '../views/Register.vue'
 import  DefaultLayout from '../components/DefaultLayout.vue'
@@ -16,6 +19,11 @@ const routes = [
         path: '/view/public/publications',
         name: 'PublicationsPublicView',
         component: PublicationsPublicView
+    },
+    {
+        path: '/view/public/products',
+        name: 'ProductsPublicView',
+        component: ProductsPublicView
     },
     {
         path: '/',
@@ -48,7 +56,23 @@ const routes = [
                 path: '/profil',
                 name: 'ProfilView',
                 component: ProfilView
-            }
+            },
+            { 
+                path: '/products',
+                name: 'Products',
+                component: Products
+            },
+            { 
+                path: '/products/create',
+                name: 'ProductCreate',
+                component: ProductView
+            },
+            { 
+                path: '/products/:id',
+                name: 'ProductView',
+                component: ProductView
+            },
+
         ]
     },
     {

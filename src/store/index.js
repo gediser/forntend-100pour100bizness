@@ -11,12 +11,27 @@ const store = createStore({
             loading: true,
             data: {}
         },
+        currentProduct:{
+            loading: true,
+            data: {}
+        },
+        categories: [],
         publicPublications: {
             loading:true,
             data: [],
             links:[]
         },
+        publicProducts: {
+            loading:true,
+            data: [],
+            links:[]
+        },
         publications: {
+            loading: true,
+            data:[],
+            links:[]
+        },
+        products: {
             loading: true,
             data:[],
             links:[]
@@ -50,6 +65,19 @@ const store = createStore({
                     commit('setPublicPublicationsLoading', false)
                 })
         },
+        getPublicProducts({commit}, {url = null} = {}){
+            url = url || 'view/product'
+            commit("setPublicProductsLoading", true)
+            return axiosClient.get(url)
+                .then((res) => {
+                    commit('setPublicProductsLoading', false)
+                    commit('setPublicProductsData', res.data)
+                    return data
+                })
+                .catch((err) => {
+                    commit('setPublicProductsLoading', false)
+                })
+        },
         getPublications({commit}, {url = null} = {}){
             url = url || '/publication'
             commit("setPublicationsLoading", true)
@@ -63,6 +91,19 @@ const store = createStore({
                     commit('setPublicationsLoading', false)
                 })
         },
+        getProducts({commit}, {url = null} = {}){
+            url = url || '/product'
+            commit("setProductsLoading", true)
+            return axiosClient.get(url)
+                .then((res) => {
+                    commit('setProductsLoading', false)
+                    commit('setProductsData', res.data)
+                    return data
+                })
+                .catch((err) => {
+                    commit('setProductsLoading', false)
+                })
+        },
         getPublication({commit}, id){
             commit("setCurrentPublicationLoading", true);
             return axiosClient
@@ -74,6 +115,27 @@ const store = createStore({
                     })
                     .catch((err) => {
                         commit("setCurrentPublicationLoading", false);
+                        throw err;
+                    })
+        },
+        getCategories({commit}){
+            return axiosClient.get('/categories')
+                        .then((res) => {
+                            commit("setCategories", res.data)
+                            return res
+                        })
+        },
+        getProduct({commit}, id){
+            commit("setCurrentProductLoading", true);
+            return axiosClient
+                    .get(`/product/${id}`)
+                    .then((res) => {
+                        commit("setCurrentProduct", res.data);
+                        commit("setCurrentProductLoading", false);
+                        return res;
+                    })
+                    .catch((err) => {
+                        commit("setCurrentProductLoading", false);
                         throw err;
                     })
         },
@@ -96,8 +158,30 @@ const store = createStore({
             }
             return response;
         },
+        saveProduct({ commit }, product){
+            delete product.image_url
+            let response;
+            if (product.id){
+                response = axiosClient
+                            .put(`/product/${product.id}`, product)
+                            .then((res) => {
+                                commit("setCurrentProduct", res.data);
+                                return res;
+                            });
+            }else {
+                response = axiosClient
+                            .post("/product", product).then((res) => {
+                                commit("setCurrentProduct", res.data);
+                                return res;
+                            });
+            }
+            return response;
+        },
         deletePublication({commit}, id){
             return axiosClient.delete(`/publication/${id}`);
+        },
+        deleteProduct({commit}, id){
+            return axiosClient.delete(`/product/${id}`);
         },
         updateProfil({ commit }, user){
             console.log('i am updating the profile')
@@ -136,6 +220,13 @@ const store = createStore({
             state.publications.data = publications.data
             state.publications.links = publications.meta.links
         },
+        setProductsLoading: (state, loading) => {
+            state.products.loading = loading
+        },
+        setProductsData: (state, products) => {
+            state.products.data = products.data
+            state.products.links = products.meta.links
+        },
         setPublicPublicationsLoading: (state, loading) => {
             state.publicPublications.loading = loading
         },
@@ -143,11 +234,24 @@ const store = createStore({
             state.publicPublications.data = publications.data
             state.publicPublications.links = publications.meta.links
         },
+        setPublicProductsLoading: (state, loading) => {
+            state.publicProducts.loading = loading
+        },
+        setPublicProductsData: (state, products) => {
+            state.publicProducts.data = products.data
+            state.publicProducts.links = products.meta.links
+        },
         setCurrentPublicationLoading:(state, loading) => {
             state.currentPublication.loading = loading
         },
         setCurrentPublication:(state, publication) => {
             state.currentPublication.data = publication.data
+        },
+        setCurrentProduct:(state, product) => {
+            state.currentProduct.data = product.data
+        },
+        setCurrentProductLoading:(state, loading) => {
+            state.currentProduct.loading = loading
         },
         logout : (state) => {
             state.user.data = {};
@@ -158,6 +262,9 @@ const store = createStore({
             state.user.data = userData.user;
             sessionStorage.setItem('TOKEN', userData.token)
         },
+        setCategories: (state, categories) => {
+            state.categories = categories.data
+        },
         notify: (state, {message, type}) =>{
             state.notification.show = true;
             state.notification.type = type;
@@ -167,7 +274,6 @@ const store = createStore({
             }, 3000)
         },
         showUserDetailsPopUp: (state, {name, email, telephone}) =>{
-            console.log("show user", name, email, telephone)
             state.userDetailsPopUp.data.name = name;
             state.userDetailsPopUp.data.email = email;
             state.userDetailsPopUp.data.telephone = telephone

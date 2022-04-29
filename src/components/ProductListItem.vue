@@ -2,12 +2,13 @@
     <div 
         class="flex flex-col py-4 px-6 shadow-md bg-white hover:bg-gray-50 h-[470px]"
     >
-        <p @click="showDetails(publication.user)" class="cursor-pointer font-bold text-indigo-600 hover:text-indigo-700 py-2">{{ publication.user.name }}</p>
-        <img :src="publication.image_url" alt="" class="w-full h-48 object-cover" />
-        <div v-html="publication.description" class="overflow-hidden flex-1"></div>
+        <p @click="showDetails(product.user)" class="cursor-pointer font-bold text-indigo-600 hover:text-indigo-700 py-2">{{ product.user.name }}</p>
+        <img :src="product.image_url" alt="" class="w-full h-48 object-cover" />
+        <p class="font-bold">{{ product.name }}</p>
+        <div v-html="product.description" class="overflow-hidden flex-1"></div>
         <div v-if="!publique" class="flex justify-between items-center mt-3">
             <router-link
-                :to="{name: 'PublicationView', params: {id: publication.id}}"
+                :to="{name: 'ProductView', params: {id: product.id}}"
                 class="flex py-2 px-4 border border-transparent text-sm rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -17,9 +18,9 @@
             </router-link>
            <div class="flex items-center">
                 <button
-                    v-if="publication.id"
+                    v-if="product.id"
                     type="button"
-                    @click="emit('delete', publication)"
+                    @click="emit('delete', product)"
                     class="h-8 w-8 flex items-center justify-center rounded-full border border-transparent text-sm text-red-500 focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -36,7 +37,7 @@
 import store from '../store';
 
 const {survey} = defineProps({
-    publication: Object,
+    product: Object,
     publique: Boolean
 })
 

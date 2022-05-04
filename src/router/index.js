@@ -7,6 +7,7 @@ import ProductView from '../views/ProductView.vue'
 import ProfilView from '../views/ProfilView.vue'
 import PublicationsPublicView from '../views/PublicationsPublicView.vue'
 import ProductsPublicView from '../views/ProductsPublicView.vue'
+import HomePublicView from '../views/HomePublicView.vue'
 import  Login from '../views/Login.vue'
 import  Register from '../views/Register.vue'
 import  DefaultLayout from '../components/DefaultLayout.vue'
@@ -15,16 +16,7 @@ import store from "../store"
 
 
 const routes = [
-    {
-        path: '/view/public/publications',
-        name: 'PublicationsPublicView',
-        component: PublicationsPublicView
-    },
-    {
-        path: '/view/public/products',
-        name: 'ProductsPublicView',
-        component: ProductsPublicView
-    },
+    
     {
         path: '/',
         redirect: '/dashboard',
@@ -91,6 +83,21 @@ const routes = [
                 path: '/register',
                 name: 'Register',
                 component: Register
+            },
+            {
+                path: '/view/public/publications',
+                name: 'PublicationsPublicView',
+                component: PublicationsPublicView
+            },
+            {
+                path: '/view/public/products',
+                name: 'ProductsPublicView',
+                component: ProductsPublicView
+            },
+            {
+                path: '/view/public/home',
+                name: 'HomePublicView',
+                component: HomePublicView
             },
             
         ]

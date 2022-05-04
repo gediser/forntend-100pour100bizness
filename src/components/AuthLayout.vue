@@ -81,12 +81,8 @@
       </DisclosurePanel>
     </Disclosure>
 
-    <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-md w-full space-y-8">
-        <router-view></router-view>
-      </div>
-    </div>
-
+    
+    <router-view></router-view>
     <Notification />
     
   </div>
@@ -101,8 +97,9 @@ import {useRouter} from 'vue-router'
 import Notification from './Notification.vue'
 
 const navigation = [
-  { name: 'Publications', to: {name: "PublicationsPublicView"}, target: true },
-  { name: 'Produits', to: {name: "ProductsPublicView"}, target: true },
+  { name: 'Accueil', to: {name: "HomePublicView"}, target: false },
+  { name: 'Publications', to: {name: "PublicationsPublicView"}, target: false },
+  { name: 'Produits', to: {name: "ProductsPublicView"}, target: false },
 ]
 
 export default {

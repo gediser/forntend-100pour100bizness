@@ -88,7 +88,7 @@
                         >
                             <option>Choisir une categorie</option>
                             <option 
-                                v-for="(item, index) in categories"
+                                v-for="(item, index) in categories.data"
                                 :key="index"
                                 :value="item.id"
                             >
@@ -96,7 +96,7 @@
                             </option>
                         </select>
                     </div>
-                    <!--/ Name -->
+                    <!--/ Category -->
 
                     <!-- Description -->
                     <div>
@@ -125,7 +125,7 @@
                         class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700
                             focus:outline-none focus:ring-2 focus:offset-2 focus-ring-indigo-500"
                     >
-                        Save
+                        Sauvegarder
                     </button>
                 </div>
             </div>
@@ -166,8 +166,10 @@ const categories = computed(() => store.state.categories)
             }
         }
     );
+if (!categories.loaded){
+    store.dispatch('getCategories')
+}
 
-store.dispatch('getCategories')
 
 if (route.params.id){
        store.dispatch('getProduct', route.params.id);

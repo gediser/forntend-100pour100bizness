@@ -15,7 +15,10 @@ const store = createStore({
             loading: true,
             data: {}
         },
-        categories: [],
+        categories: {
+            loaded: false,
+            data:[]
+        },
         publicPublications: {
             loading:true,
             data: [],
@@ -263,7 +266,8 @@ const store = createStore({
             sessionStorage.setItem('TOKEN', userData.token)
         },
         setCategories: (state, categories) => {
-            state.categories = categories.data
+            state.categories.data = categories.data
+            state.categories.loaded = true
         },
         notify: (state, {message, type}) =>{
             state.notification.show = true;

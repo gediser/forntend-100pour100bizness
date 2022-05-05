@@ -7,6 +7,15 @@ const store = createStore({
             data: {},
             token: sessionStorage.getItem('TOKEN'),
         },
+        search:{
+            q:'',
+            loading: true,
+            show:false,
+            data:{
+                publications:[],
+                products:[]
+            }
+        },
         currentPublication:{
             loading: true,
             data: {}
@@ -55,6 +64,12 @@ const store = createStore({
     },
     getters: {},
     actions: {
+        searchAll({commit}, model){
+            return axiosClient.post("search/all", model).then((res)=>{
+                commit("setResultsSearchAll", res.data)
+                return res
+            })
+        },
         getPublicPublications({commit}, {url = null} = {}){
             url = url || 'view/publication'
             commit("setPublicPublicationsLoading", true)
@@ -75,7 +90,7 @@ const store = createStore({
                 .then((res) => {
                     commit('setPublicProductsLoading', false)
                     commit('setPublicProductsData', res.data)
-                    return data
+                    return res
                 })
                 .catch((err) => {
                     commit('setPublicProductsLoading', false)
@@ -187,7 +202,6 @@ const store = createStore({
             return axiosClient.delete(`/product/${id}`);
         },
         updateProfil({ commit }, user){
-            console.log('i am updating the profile')
             return axiosClient.post('/update-profil', user)
                 .then(({data}) => {
                     return data
@@ -216,6 +230,13 @@ const store = createStore({
         },
     },
     mutations: {
+        
+        setResultsSearchAll: (state, data)=>{
+            state.search.data = data
+        },
+        setPublicProductsData: (state, data) => {
+            state.search.data = data
+        },
         setPublicationsLoading: (state, loading) => {
             state.publications.loading = loading
         },

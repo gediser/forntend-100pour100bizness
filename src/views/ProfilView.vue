@@ -143,7 +143,6 @@ function saveProfil(){
      
     })
     .catch((err)=>{
-      console.log("error", err, err.response)
       if (err.response.status === 422){
         errors.value = err.response.data.errors
       }

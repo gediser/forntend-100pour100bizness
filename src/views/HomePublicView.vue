@@ -14,6 +14,7 @@
                     <form @submit.prevent="search">
                         <input
                             type="text" 
+                            required
                             name="q"
                             id="q"
                             v-model="model.q"
@@ -31,8 +32,44 @@
                         </div>
                     </form>
                 </div>
-                <div class="resultats">
-
+                <div v-if="model.show" class="resultats">
+                    <div v-if="model.loading">
+                        Chargement...
+                    </div>
+                    <div v-else>
+                        <div v-if="model.data.publications.length" class="publications">
+                        <h2 class="text-xl font-bold text-gray-900">Publications</h2>
+                            <div  class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
+                                <PublicationListItem 
+                                    v-for="(pub, ind) in model.data.publications"
+                                    :key="pub.id"
+                                    :publication="pub"
+                                    :publique="true"
+                                    class="opacity-0 animate-fade-in-down"
+                                    :style="{animationDelay: `${ind*0.1}s`}"
+                                />
+                            </div>
+                        </div>
+                        <div v-if="model.data.products.length" class="produits">
+                            <h2 class="text-xl font-bold text-gray-900">Produits</h2>
+                            <div  class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
+                                <ProductListItem 
+                                    v-for="(prod, ind) in model.data.products"
+                                    :key="prod.id"
+                                    :product="prod"
+                                    :publique="true"
+                                    class="opacity-0 animate-fade-in-down"
+                                    :style="{animationDelay: `${ind*0.1}s`}"
+                                />
+                            </div>
+                        </div>
+                        <div 
+                            v-if="!model.data.publications.length && !model.data.products.length"
+                        >
+                            Pas de resultats
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="publicite-wrapper mt-3"> 
                     <h2 class="text-xl font-bold text-gray-900">Publicite</h2>
@@ -55,16 +92,38 @@
             
         </div>
     </page-component>
+    <user-details-pop-up></user-details-pop-up>
 </template>
 
 <script setup>
 import PageComponent from '../components/PageComponent.vue'
 import store from '../store'
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
+import ProductListItem from "../components/ProductListItem.vue"
+import PublicationListItem from "../components/PublicationListItem.vue"
+import UserDetailsPopUp from '../components/UserDetailsPopUp.vue';
 
 const model = ref({
-    q:''
+    q:'',
+    loading:true,
+    show:false,
+    data:{
+        publications:[],
+        products:[]
+    }
 })
+
+// watch to current survey data change and when this happen we update local
+
+watch(
+    () => store.state.search.data,
+    (newVal, oldVal) =>{
+        model.value.data = {
+            ...JSON.parse(JSON.stringify(newVal)),
+            
+        }
+    }
+);
 
 const categories = computed(() => store.state.categories)
 if (!categories.loaded){
@@ -72,7 +131,11 @@ if (!categories.loaded){
 }
 
 function search(){
-
+    model.value.show = true
+    model.value.loading = true
+    store.dispatch("searchAll", model.value).then(()=>{
+        model.value.loading = false
+    })
 }
 
 </script>

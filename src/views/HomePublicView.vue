@@ -83,7 +83,7 @@
             <div class="categories px-4 py-3 border border-black-600">
                 <h2 class="text-xl font-bold text-gray-900">Categories</h2>
                 <div class="mt-3">
-                    <div class="text-indigo-600 underline" v-for="(item, index) in categories.data" :key="index">
+                    <div class="text-indigo-600 underline cursor-pointer" v-for="(item, index) in categories.data" :key="index" @click="searchCategorie(item.id)">
                         {{item.name}}
                     </div>
                 </div>
@@ -138,6 +138,13 @@ function search(){
     })
 }
 
+function searchCategorie(id){
+    model.value.show = true
+    model.value.loading = true
+    store.dispatch("searchCategory", id).then(()=>{
+        model.value.loading = false
+    })
+}
 </script>
 
 <style>

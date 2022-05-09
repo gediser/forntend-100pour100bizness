@@ -64,6 +64,12 @@ const store = createStore({
     },
     getters: {},
     actions: {
+        searchCategory({commit}, id){
+            return axiosClient.post(`search/category/${id}`).then((res)=>{
+                commit("setResultsSearchAll", res.data)
+                return res
+            })
+        },
         searchAll({commit}, model){
             return axiosClient.post("search/all", model).then((res)=>{
                 commit("setResultsSearchAll", res.data)

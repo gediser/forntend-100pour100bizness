@@ -77,6 +77,20 @@
                     </div>
                     <!--/ Name -->
 
+                     <!-- Prix -->
+                    <div>
+                        <label for="prix" class="block text-sm font-medium text-gray-700">Prix</label>
+                        <input
+                            type="number" 
+                            name="prix"
+                            id="prix"
+                            v-model="model.prix"
+                            autocomplete="product_prix"
+                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        /> 
+                    </div>
+                    <!--/ Prix -->
+
                     <!-- Category -->
                     <div>
                         <label for="category" class="block text-sm font-medium text-gray-700">Categorie</label>
@@ -153,7 +167,8 @@ const categories = computed(() => store.state.categories)
         description: null,
         image_url: null,
         name: null,
-        category_id: null
+        category_id: null,
+        prix: null
     })
 
 // watch to current survey data change and when this happen we update local
@@ -194,6 +209,7 @@ function onImageChoose(ev){
 }
 
 function saveProduct(){
+    console.log("avant envoi", model.value.prix)
     store.dispatch("saveProduct", model.value).then(({ data }) => {
             store.commit('notify', {
                 type: 'success',

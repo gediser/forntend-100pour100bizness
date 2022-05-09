@@ -63,6 +63,27 @@
                     </div>
                     <!--/ Image -->
 
+                    <!-- Category -->
+                    <div>
+                        <label for="category" class="block text-sm font-medium text-gray-700">Categorie</label>
+                        <select
+                            name="name"
+                            id="name"
+                            v-model="model.category_id"
+                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        >
+                            <option>Choisir une categorie</option>
+                            <option 
+                                v-for="(item, index) in categories.data"
+                                :key="index"
+                                :value="item.id"
+                            >
+                                {{item.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <!--/ Category -->
+
                     <!-- Description -->
                     <div>
                         <label for="about" class="block text-sm font-medium text-gray-700">
@@ -110,12 +131,14 @@ const router = useRouter();
 const route = useRoute();
 
 const publicationLoading = computed(() => store.state.currentPublication.loading)
+const categories = computed(() => store.state.categories)
 
 // Create empty survey
     let model = ref({
         image:null,
         description: null,
         image_url: null,
+        category_id: null,
     })
 
 // watch to current survey data change and when this happen we update local
@@ -128,6 +151,10 @@ const publicationLoading = computed(() => store.state.currentPublication.loading
             }
         }
     );
+
+if (!categories.loaded){
+    store.dispatch('getCategories')
+}
 
 if (route.params.id){
        store.dispatch('getPublication', route.params.id);

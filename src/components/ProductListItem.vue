@@ -4,7 +4,10 @@
     >
         <p @click="showDetails(product.user)" class="cursor-pointer font-bold text-indigo-600 hover:text-indigo-700 py-2">{{ product.user.name }}</p>
         <img :src="product.image_url" alt="" class="w-full h-48 object-cover" />
-        <p class="font-bold">{{ product.name }}</p>
+        <div class="font-bold flex justify-between items-center">
+            <p>{{ product.name }}</p>
+            <p>{{ product.prix }} FCFA</p>
+        </div>
         <div v-html="product.description" class="overflow-hidden flex-1"></div>
         <div v-if="!publique" class="flex justify-between items-center mt-3">
             <router-link

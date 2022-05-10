@@ -69,6 +69,7 @@
                         <input
                             type="text" 
                             name="name"
+                            maxlength="250" 
                             id="name"
                             v-model="model.name"
                             autocomplete="product_name"
@@ -95,8 +96,8 @@
                     <div>
                         <label for="category" class="block text-sm font-medium text-gray-700">Categorie</label>
                         <select
-                            name="name"
-                            id="name"
+                            name="category"
+                            id="category"
                             v-model="model.category_id"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         >

@@ -8,7 +8,7 @@
         </template>
 
         <div v-if="products.loading" class="flex justify-center">Chargement...</div>
-        <div v-else-if="!products.data.length" class="flex justify-center">Vous n'avez pas de publications</div>
+        <div v-else-if="!products.data.length" class="flex justify-center">Vous n'avez pas de produits</div>
         <div v-else>
             <div  class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
                 <ProductListItem 

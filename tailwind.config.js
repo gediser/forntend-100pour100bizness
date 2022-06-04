@@ -5,6 +5,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        belge: "#C8AD7F",
+        cbelge: "#7F9AC8",
+      },
       keyframes:{
         'fade-in-down':{
           "from":{

@@ -8,11 +8,11 @@
     <body class="h-full">
     ```
   -->
-  <div class="min-h-full">
+  <div class="w-full md:m-auto md:w-[80%] relative p-2">
     <div id="header">
         <div class="row h-16 flex items-center justify-between mb-4">
             <div class="logo h-8 flex items-center">
-                <img class="h-8 w-8" alt="logo" src="images/logo.jpg"/>
+                <img class="h-8 w-8" alt="logo" src="/images/logo.jpg"/>
             </div>
             <div class="recherche h-8  flex items-center">
                 <input 
@@ -28,27 +28,20 @@
             </div>
         </div>
         <div class="flex flex-wrap items-center justify-between">
-          <div class="ml-10 flex flex-wrap items-baseline space-x-4">
-                <router-link v-for="item in navigation" :key="item.name" :to="item.to" active-class="bg-gray-900 text-white" :class="[this.$route.name === item.to.name ? '' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-medium']" >{{ item.name }}</router-link>
+          <div class="flex flex-wrap items-baseline space-x-4">
+                <router-link v-for="item in navigation" :key="item.name" :to="item.to" active-class="bg-cbelge text-white hover:scale-110 hover:text-red-500" :class="[this.$route.name === item.to.name ? '' : 'bg-belge hover:scale-110 text-white hover:text-red-500', 'px-3 py-2 rounded-md text-sm font-medium']" >{{ item.name }}</router-link>
               </div>
-            <div class="flex flex-wrap items-center">
-                <div class="hover:scale-110 text-white hover:text-red-500 mr-2">
-                    <a href="/publications" class="bg-belge rounded-lg p-2 ">Publications</a>
-                </div>
-                <div class="hover:scale-110 text-white hover:text-red-500">
-                    <a href="/produits" class="bg-belge rounded-lg p-2">Produits</a>
-                </div>
-            </div>
+            
             <div>
-                <div class="hover:scale-110 text-white hover:text-red-500">
-                    <a href="/connexion" class="bg-belge rounded-lg p-2 ">Se connecter</a>
+                <div @click="logout" class="hover:scale-110 text-white hover:text-red-500">
+                    <a href="#" class="bg-belge rounded-lg p-2 ">D&eacute;connexion</a>
                 </div>
             </div>
         </div>
     </div>
 
     <router-view></router-view>
-    <div id="footer" class="fixed bottom-0 left-[10%] w-[80%] bottom-4">
+    <div id="footer" class="bg-white fixed bottom-0 left-[10%] w-[80%] bottom-4">
         <div class="flex flex-wrap items-center justify-between">
             <div class="hover:scale-110 text-belge hover:text-red-500">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -98,7 +91,7 @@ import {useRouter} from 'vue-router'
 import Notification from './Notification.vue'
 
 const navigation = [
-  { name: 'Dashboard', to: {name: "Dashboard"} },
+  //{ name: 'Dashboard', to: {name: "Dashboard"} },
   { name: 'Mes publications', to: {name: "Publications"} },
   { name: 'Mes produits', to: {name: "Products"} },
   { name: 'Profil', to: {name: "ProfilView"} },
@@ -121,7 +114,7 @@ export default {
   setup() {
     const store = useStore();
     const router = useRouter();
-
+    
     function logout() {
       store.dispatch('logout')
         .then(()=>{

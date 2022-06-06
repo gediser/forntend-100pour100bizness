@@ -4,12 +4,11 @@
     <div class="max-w-md w-full space-y-8">
       <div>
       <div>
-        <img class="mx-auto h-12 w-auto" src="/images/logo.jpg" alt="Buziness" />
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Connectez-vous</h2>
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-belge">Connectez-vous</h2>
         <p class="mt-2 text-center text-sm text-gray-600">
           Ou
           {{ ' ' }}
-          <router-link :to="{name: 'Register'}" class="font-medium text-indigo-600 hover:text-indigo-500"> Inscrivez-vous gratuitement </router-link>
+          <router-link :to="{name: 'Register'}" class="font-medium text-cbelge hover:text-indigo-500"> Inscrivez-vous gratuitement </router-link>
         </p>
       </div>
       <form class="mt-8 space-y-6" @submit="login">
@@ -43,12 +42,12 @@
           </div>
 
           <div class="text-sm">
-            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"> Mot de passe oubli&eacute;? </a>
+            <a href="#" class="font-medium text-cbelge hover:text-indigo-500"> Mot de passe oubli&eacute;? </a>
           </div>
         </div>
 
         <div>
-          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-cbelge hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
               <LockClosedIcon class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
             </span>

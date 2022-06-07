@@ -239,6 +239,7 @@ const store = createStore({
         
         setResultsSearchAll: (state, data)=>{
             state.search.data = data
+            state.search.q = data.q
         },
         setPublicProductsData: (state, data) => {
             state.search.data = data

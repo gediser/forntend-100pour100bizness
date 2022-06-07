@@ -20,7 +20,7 @@
             </div>
         </template>
 
-        <div v-if="publicationLoading" class="flex justify-center">Loading...</div>
+        <div v-if="publicationLoading" class="flex justify-center">Chargement...</div>
 
         <form v-else @submit.prevent="savePublication" class="animate-fade-in-down">
             <div class="shadow sm:rounded-md sm:overflow-hidden">

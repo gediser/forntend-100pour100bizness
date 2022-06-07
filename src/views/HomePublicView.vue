@@ -3,48 +3,19 @@
         <template v-slot:header>
             <div class="flex justify-between items-center">
                 <h1 class="text-3xl font-bold text-gray-900">Accueil</h1>
-                <router-link
-                    :to="{name: 'Login'}"
-                    class="py-2 px-3 text-white bg-emerald-500 rounded-md hover:bg-emerald-600"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 -mt-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                    </svg>
-                    Se connecter 
-                </router-link>
+                
             </div>
         </template>
 
         <div class="grid grid-cols-4 gap-4">
             <div class="px-4 py-3 col-span-4 md:col-span-3 border border-black-600 max">
-                <h2 class="text-xl font-bold text-gray-900">Recherche</h2>
-                <div class="recherche">
-                    <form @submit.prevent="search">
-                        <input
-                            type="text" 
-                            required
-                            name="q"
-                            id="q"
-                            v-model="model.q"
-                            autocomplete="search_q"
-                            class="mt-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        /> 
-                        <div class="mt-4 bg-gray-50 text-right">
-                            <button
-                                type="submit"
-                                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700
-                                    focus:outline-none focus:ring-2 focus:offset-2 focus-ring-indigo-500"
-                            >
-                                Rechercher
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <div v-if="model.show" class="resultats">
+                
+                <div v-if="model.show" class="resultats mb-3">
                     <div v-if="model.loading">
                         Chargement...
                     </div>
                     <div v-else>
+                        <h2 class="text-xl font-bold text-gray-900 mb-3">Recherche "{{ model.data.q }}"</h2>
                         <div v-if="model.data.publications.length" class="publications">
                         <h2 class="text-xl font-bold text-gray-900">Publications</h2>
                             <div  class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
@@ -74,12 +45,12 @@
                         <div 
                             v-if="!model.data.publications.length && !model.data.products.length"
                         >
-                            Pas de resultats
+                            <p>Pas de resultats</p>
                         </div>
                     </div>
                     
                 </div>
-                <div class="publicite-wrapper mt-3"> 
+                <div class="publicite-wrapper"> 
                     <h2 class="text-xl font-bold text-gray-900">Publicite</h2>
                     <div class="publicite mt-2">
                         <img src="/images/pub1.jpg" alt="publicite"/>
@@ -126,6 +97,8 @@ const model = ref({
 watch(
     () => store.state.search.data,
     (newVal, oldVal) =>{
+        model.value.show = true
+        model.value.loading = false
         model.value.data = {
             ...JSON.parse(JSON.stringify(newVal)),
             
@@ -138,13 +111,7 @@ if (!categories.loaded){
     store.dispatch('getCategories')
 }
 
-function search(){
-    model.value.show = true
-    model.value.loading = true
-    store.dispatch("searchAll", model.value).then(()=>{
-        model.value.loading = false
-    })
-}
+
 
 function searchCategorie(id){
     model.value.show = true

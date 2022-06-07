@@ -93,8 +93,6 @@
 </template>
 
 <script>
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline'
 import {useStore} from 'vuex'
 import {computed, ref} from 'vue'
 import {useRouter} from 'vue-router'
@@ -109,16 +107,6 @@ const navigation = [
 
 export default {
   components: {
-    Disclosure,
-    DisclosureButton,
-    DisclosurePanel,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuItems,
-    BellIcon,
-    MenuIcon,
-    XIcon,
     Notification,
   },
   setup() {

@@ -31,7 +31,18 @@
               </form>
           </div>
       </div>
-      <div class="flex flex-wrap items-center justify-between">
+      <div class="hamburger-menu sm:hidden">
+        <input id="menu__toggle" type="checkbox" />
+        <label class="menu__btn" for="menu__toggle">
+          <span></span>
+        </label>
+
+        <ul class="menu__box">
+          <li><router-link v-for="item in navigation" :key="item.name" :to="item.to"  :class="['menu__item']" >{{ item.name }}</router-link></li>
+          <li><router-link :to="{name:'Login'}" :class="['menu__item']" >Se connecter</router-link></li>
+        </ul>
+      </div>
+      <div class="menu-screen-lg flex flex-wrap items-center justify-between">
         <div class="flex flex-wrap items-baseline space-x-4">
           <router-link v-for="item in navigation" :key="item.name" :to="item.to" active-class="bg-cbelge text-white hover:scale-110 hover:text-red-500" :class="[this.$route.name === item.to.name ? '' : 'bg-belge hover:scale-110 text-white hover:text-red-500', 'px-3 py-2 rounded-md text-sm font-medium']" >{{ item.name }}</router-link>
         </div>
@@ -76,8 +87,6 @@
 </template>
 
 <script>
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline'
 import {useStore} from 'vuex'
 import {computed, ref} from 'vue'
 import {useRouter} from 'vue-router'
@@ -91,16 +100,7 @@ const navigation = [
 
 export default {
   components: {
-    Disclosure,
-    DisclosureButton,
-    DisclosurePanel,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuItems,
-    BellIcon,
-    MenuIcon,
-    XIcon,
+    
     Notification,
   },
   setup() {
@@ -142,3 +142,88 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+
+@media screen and (max-width: 640px){
+  .menu-screen-lg{
+    display: none;
+  }
+}
+
+#menu__toggle {
+  opacity: 0;
+}
+#menu__toggle:checked + .menu__btn > span {
+  transform: rotate(45deg);
+}
+#menu__toggle:checked + .menu__btn > span::before {
+  top: 0;
+  transform: rotate(0deg);
+}
+#menu__toggle:checked + .menu__btn > span::after {
+  top: 0;
+  transform: rotate(90deg);
+}
+#menu__toggle:checked ~ .menu__box {
+  left: 0 !important;
+}
+
+.menu__btn {
+  position: absolute;
+  top: 80px;
+  left: 10px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  z-index: 1;
+}
+.menu__btn > span,
+.menu__btn > span::before,
+.menu__btn > span::after {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  /*background-color: #616161;*/
+  background-color: #C8AD7F;
+  transition-duration: .25s;
+}
+.menu__btn > span::before {
+  content: '';
+  top: -8px;
+}
+.menu__btn > span::after {
+  content: '';
+  top: 8px;
+}
+.menu__box {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 300px;
+  height: 100%;
+  margin: 0;
+  padding: 80px 0;
+  list-style: none;
+  background-color: #ECEFF1;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+  transition-duration: .25s;
+}
+.menu__item {
+  display: block;
+  padding: 12px 24px;
+  /*color: #333;*/
+  color: #C8AD7F;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  transition-duration: .25s;
+}
+.menu__item:hover {
+  background-color: #CFD8DC;
+}
+
+</style>

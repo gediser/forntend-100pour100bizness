@@ -45,43 +45,43 @@
     </div>
 
     <router-view></router-view>
-    <div id="footer" class="bg-white fixed bottom-0 left-[10%] w-[80%] bottom-4">
-        <div class="flex flex-wrap items-center justify-between">
-            <div class="hover:scale-110 hover:text-red-500">
+    <div id="footer" class="fixed bg-white left-0 lg:left-[10%] w-full lg:w-[80%] bottom-0">
+        <div class="flex flex-wrap items-center justify-between mx-auto w-full lg:w-[50%] p-4 lg:p-0">
+            <div class="hover:scale-110 hover:text-red-500 text-sm sm:text-base">
                 <router-link 
                   :to="{name: 'Dashboard'}" 
                   active-class="hover:scale-110 hover:text-red-500"
                   :class="[this.$route.name === 'Dashboard' ? '' : 'text-cbelge']"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 sm:h-16 sm:w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                     </svg>
                   Domicile
                 </router-link>
             </div>
-            <div class="hover:scale-110 text-belge hover:text-red-500">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <div class="hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 sm:h-16 sm:w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
                 Vraie vue
             </div>
-            <div class="hover:scale-110 text-belge hover:text-red-500">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <div class="hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 sm:h-16 sm:w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                   </svg>
                 Message
             </div>
-            <div class="hover:scale-110 text-belge hover:text-red-500">
-                <span class="iconify h-16 w-16" data-icon="heroicons-outline:shopping-cart"></span>
+            <div class="hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
+                <span class="iconify h-8 w-8 sm:h-16 sm:w-16" data-icon="heroicons-outline:shopping-cart"></span>
                 
                 Charriot
             </div>
-            <div class="hover:scale-110 text-belge hover:text-red-500">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <div class="hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 sm:h-16 sm:w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                Mon buziness
+                My bizness
             </div>
         </div>
         

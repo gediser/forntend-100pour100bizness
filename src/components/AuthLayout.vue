@@ -57,23 +57,23 @@
 
     <router-view></router-view>
 
-    <div id="footer" class="fixed bg-white left-[10%] w-[80%] bottom-0">
-      <div class="flex flex-wrap items-center justify-between mx-auto w-full lg:w-[50%] py-4">
-          <div class="hover:scale-110 text-belge hover:text-red-500">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <div id="footer" class="fixed bg-white left-0 lg:left-[10%] w-full lg:w-[80%] bottom-0">
+      <div class="flex flex-wrap items-center justify-between mx-auto w-full lg:w-[50%] p-4 lg:p-0">
+          <div class="hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 sm:h-16 sm:w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
               Domicile
           </div>
-          <div class="hover:scale-110 text-belge hover:text-red-500">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <div class="hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 sm:h-16 sm:w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
               Vraie vue
           </div>
-          <div class="hover:scale-110 text-belge hover:text-red-500">
-              <span class="iconify h-16 w-16" data-icon="heroicons-outline:shopping-cart"></span>
+          <div class="hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
+              <span class="iconify h-8 w-8 sm:h-16 sm:w-16" data-icon="heroicons-outline:shopping-cart"></span>
               
               Charriot
           </div>
@@ -127,8 +127,9 @@ export default {
         store.dispatch("searchAll", model.value).then(()=>{
             //model.value.loading = false
             console.log("retour")
-            console.log(store.state.search.data)
+            console.log("first", store.state.search.data)
             router.push({name:"HomePublicView"});
+            console.log("second", store.state.search.data)
         })
     }
 
@@ -176,7 +177,7 @@ export default {
   width: 26px;
   height: 26px;
   cursor: pointer;
-  z-index: 1;
+  z-index: 2;
 }
 .menu__btn > span,
 .menu__btn > span::before,
@@ -201,7 +202,8 @@ export default {
   display: block;
   position: fixed;
   top: 0;
-  left: -100%;
+  /*left: -100%;*/
+  left: -200%;
   width: 300px;
   height: 100%;
   margin: 0;
@@ -210,6 +212,7 @@ export default {
   background-color: #ECEFF1;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
   transition-duration: .25s;
+  z-index: 1;
 }
 .menu__item {
   display: block;

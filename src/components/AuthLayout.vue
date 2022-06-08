@@ -32,14 +32,14 @@
           </div>
       </div>
       <div class="hamburger-menu sm:hidden">
-        <input id="menu__toggle" type="checkbox" />
+        <input id="menu__toggle" type="checkbox" ref="hiddencheckbox"/>
         <label class="menu__btn" for="menu__toggle">
           <span></span>
         </label>
 
         <ul class="menu__box">
-          <li><router-link v-for="item in navigation" :key="item.name" :to="item.to"  :class="['menu__item']" >{{ item.name }}</router-link></li>
-          <li><router-link :to="{name:'Login'}" :class="['menu__item']" >Se connecter</router-link></li>
+          <li><router-link @click="this.$refs.hiddencheckbox.click();" v-for="item in navigation" :key="item.name" :to="item.to"  :class="['menu__item']" >{{ item.name }}</router-link></li>
+          <li><router-link @click="this.$refs.hiddencheckbox.click();" :to="{name:'Login'}" :class="['menu__item']" >Se connecter</router-link></li>
         </ul>
       </div>
       <div class="menu-screen-lg flex flex-wrap items-center justify-between">
@@ -59,23 +59,22 @@
 
     <div id="footer" class="fixed bg-white left-0 lg:left-[10%] w-full lg:w-[80%] bottom-0">
       <div class="flex flex-wrap items-center justify-between mx-auto w-full lg:w-[50%] p-4 lg:p-0">
-          <div class="hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
+          <div class="flex flex-col items-center hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 sm:h-16 sm:w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
-              Domicile
+              <span>Domicile</span>
           </div>
-          <div class="hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
+          <div class="flex flex-col items-center hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 sm:h-16 sm:w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
-              Vraie vue
+              <span>Vraie vue</span>
           </div>
-          <div class="hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
+          <div class="flex flex-col items-center hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
               <span class="iconify h-8 w-8 sm:h-16 sm:w-16" data-icon="heroicons-outline:shopping-cart"></span>
-              
-              Charriot
+              <span>Charriot</span>
           </div>
           
       </div>
@@ -120,7 +119,7 @@ export default {
     function searchUp(){
       search();
     }
-
+    
     function search(){
         //model.value.show = true
         //model.value.loading = true
@@ -138,7 +137,7 @@ export default {
       navigation,
       logout,
       searchUp,
-      model
+      model,
     }
   },
 }

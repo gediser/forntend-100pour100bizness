@@ -31,16 +31,16 @@
                 </form>
             </div>
         </div>
-        <div class="flex flex-wrap items-center justify-between">
-          <div class="flex flex-wrap items-baseline space-x-4">
-                <router-link v-for="item in navigation" :key="item.name" :to="item.to" active-class="bg-cbelge text-white hover:scale-110 hover:text-red-500" :class="[this.$route.name === item.to.name ? '' : 'bg-belge hover:scale-110 text-white hover:text-red-500', 'px-3 py-2 rounded-md text-sm font-medium']" >{{ item.name }}</router-link>
-              </div>
-            
-            <div>
-                <div @click="logout" class="hover:scale-110 text-white hover:text-red-500">
-                    <a href="#" class="bg-belge rounded-lg p-2 ">D&eacute;connexion</a>
-                </div>
-            </div>
+        <div class="hamburger-menu sm:hidden">
+          <input id="menu__toggle" type="checkbox" ref="hiddencheckbox"/>
+          <label class="menu__btn" for="menu__toggle">
+            <span></span>
+          </label>
+
+          <ul class="menu__box">
+            <li><router-link @click="this.$refs.hiddencheckbox.click();" v-for="item in navigation" :key="item.name" :to="item.to"  :class="['menu__item']" >{{ item.name }}</router-link></li>
+            <li><a href="#" @click="logout" class="menu__item ">D&eacute;connexion</a></li>
+          </ul>
         </div>
     </div>
 
@@ -51,37 +51,36 @@
                 <router-link 
                   :to="{name: 'Dashboard'}" 
                   active-class="hover:scale-110 hover:text-red-500"
-                  :class="[this.$route.name === 'Dashboard' ? '' : 'text-cbelge']"
+                  :class="[this.$route.name === 'Dashboard' ? '' : 'text-cbelge', 'flex flex-col items-center']"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 sm:h-16 sm:w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                     </svg>
-                  Domicile
+                  <span>Domicile</span>
                 </router-link>
             </div>
-            <div class="hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
+            <div class="flex flex-col items-center hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 sm:h-16 sm:w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
-                Vraie vue
+                <span>Vraie vue</span>
             </div>
-            <div class="hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
+            <div class="flex flex-col items-center hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 sm:h-16 sm:w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                   </svg>
-                Message
+                <span>Message</span>
             </div>
-            <div class="hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
+            <div class="flex flex-col items-center hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
                 <span class="iconify h-8 w-8 sm:h-16 sm:w-16" data-icon="heroicons-outline:shopping-cart"></span>
-                
-                Charriot
+                <span>Charriot</span>
             </div>
-            <div class="hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
+            <div class="flex flex-col items-center hover:scale-110 text-belge hover:text-red-500 text-sm sm:text-base">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 sm:h-16 sm:w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                My bizness
+                <span>My bizness</span>
             </div>
         </div>
         
@@ -150,3 +149,90 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+
+@media screen and (max-width: 640px){
+  .menu-screen-lg{
+    display: none;
+  }
+}
+
+#menu__toggle {
+  opacity: 0;
+}
+#menu__toggle:checked + .menu__btn > span {
+  transform: rotate(45deg);
+}
+#menu__toggle:checked + .menu__btn > span::before {
+  top: 0;
+  transform: rotate(0deg);
+}
+#menu__toggle:checked + .menu__btn > span::after {
+  top: 0;
+  transform: rotate(90deg);
+}
+#menu__toggle:checked ~ .menu__box {
+  left: 0 !important;
+}
+
+.menu__btn {
+  position: absolute;
+  top: 80px;
+  left: 10px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  z-index: 2;
+}
+.menu__btn > span,
+.menu__btn > span::before,
+.menu__btn > span::after {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  /*background-color: #616161;*/
+  background-color: #C8AD7F;
+  transition-duration: .25s;
+}
+.menu__btn > span::before {
+  content: '';
+  top: -8px;
+}
+.menu__btn > span::after {
+  content: '';
+  top: 8px;
+}
+.menu__box {
+  display: block;
+  position: fixed;
+  top: 0;
+  /*left: -100%;*/
+  left: -200%;
+  width: 300px;
+  height: 100%;
+  margin: 0;
+  padding: 80px 0;
+  list-style: none;
+  background-color: #ECEFF1;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+  transition-duration: .25s;
+  z-index: 1;
+}
+.menu__item {
+  display: block;
+  padding: 12px 24px;
+  /*color: #333;*/
+  color: #C8AD7F;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  transition-duration: .25s;
+}
+.menu__item:hover {
+  background-color: #CFD8DC;
+}
+
+</style>

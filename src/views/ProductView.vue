@@ -210,7 +210,6 @@ function onImageChoose(ev){
 }
 
 function saveProduct(){
-    console.log("avant envoi", model.value.prix)
     store.dispatch("saveProduct", model.value).then(({ data }) => {
             store.commit('notify', {
                 type: 'success',

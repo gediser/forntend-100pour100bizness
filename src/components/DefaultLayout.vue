@@ -15,13 +15,13 @@
                 <img class="h-8 w-8" alt="logo" src="/images/logo.jpg"/>
             </div>
             <div class="recherche h-8  flex items-center">
-                <form class="flex items-center" @submit.prevent="searchUp">
+                <form class="flex items-center" @submit.prevent="search">
                   <input 
                       class="relative left-1 h-8  border-2 border-belge rounded-l-full lg:rounded-r-0 pl-4 m-0 focus:right-[1px] focus:outline-2 focus:ring focus:border-belge" 
                       type="text" 
                       placeholder="Rechercher des publications ou bien produits"
                       v-model="model.q"
-                      @keydown.enter="searchUp"
+                      @keydown.enter="search"
                   />
                   <button type="submit" class="h-8 bg-belge text-white px-2 border border-belge hover:text-red-500">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -41,6 +41,17 @@
             <li><router-link @click="this.$refs.hiddencheckbox.click();" v-for="item in navigation" :key="item.name" :to="item.to"  :class="['menu__item']" >{{ item.name }}</router-link></li>
             <li><a href="#" @click="logout" class="menu__item ">D&eacute;connexion</a></li>
           </ul>
+        </div>
+        <div class="menu-screen-lg flex flex-wrap items-center justify-between">
+          <div class="flex flex-wrap items-baseline space-x-4">
+                <router-link v-for="item in navigation" :key="item.name" :to="item.to" active-class="bg-cbelge text-white hover:scale-110 hover:text-red-500" :class="[this.$route.name === item.to.name ? '' : 'bg-belge hover:scale-110 text-white hover:text-red-500', 'px-3 py-2 rounded-md text-sm font-medium']" >{{ item.name }}</router-link>
+              </div>
+            
+            <div>
+                <div @click="logout" class="hover:scale-110 text-white hover:text-red-500">
+                    <a href="#" class="bg-belge rounded-lg p-2 ">D&eacute;connexion</a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -121,29 +132,17 @@ export default {
           router.push({name: 'Login'})
         })
     }
+
     function search(){
-        //model.value.show = true
-        //model.value.loading = true
-        console.log("search")
-        store.dispatch("searchAll", model.value).then(()=>{
-            //model.value.loading = false
-            console.log("reponse correcte")
-            router.push({name:"HomePublicView"});
-        })
+        router.push({name:"HomePublicView"});
+        store.dispatch("searchAll", model.value)
     }
-    function searchUp(){
-      search();
-      console.log("okay")
-      //
-    }
-    
 
     return {
       user: computed(() => store.state.user.data),
       navigation,
       logout,
       model,
-      searchUp,
       search
     }
   },

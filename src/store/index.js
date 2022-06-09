@@ -223,6 +223,7 @@ const store = createStore({
         login({ commit }, user){
             return axiosClient.post('/login', user)
                 .then(({data}) => {
+                    console.log("response", data.token, data.user)
                     commit('setUser', data)
                     return data
                 })

@@ -10,7 +10,6 @@ import ProductsPublicView from '../views/ProductsPublicView.vue'
 import HomePublicView from '../views/HomePublicView.vue'
 import  Login from '../views/Login.vue'
 import  Register from '../views/Register.vue'
-import  DefaultLayout from '../components/DefaultLayout.vue'
 import  AuthLayout from '../components/AuthLayout.vue'
 import store from "../store"
 
@@ -21,7 +20,7 @@ const routes = [
         path: '/',
         redirect: '/dashboard',
         name: 'Dashboard',
-        component: DefaultLayout,
+        component: AuthLayout,
         meta: {requireAuth: true},
         children: [
             { 
@@ -112,7 +111,10 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    if (to.meta.requireAuth && !store.state.user.token){
+    if (to.meta.isGuest){
+        next()
+    }
+    else if (to.meta.requireAuth && !store.state.user.token){
         next({name: 'HomePublicView'})
     } else if (store.state.user.token && to.meta.isGuest){
         next({name: 'Dashboard'})

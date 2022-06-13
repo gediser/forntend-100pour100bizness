@@ -8,6 +8,7 @@ import ProfilView from '../views/ProfilView.vue'
 import PublicationsPublicView from '../views/PublicationsPublicView.vue'
 import ProductsPublicView from '../views/ProductsPublicView.vue'
 import HomePublicView from '../views/HomePublicView.vue'
+import AccueilPublic from '../views/AccueilPublic.vue'
 import  Login from '../views/Login.vue'
 import  Register from '../views/Register.vue'
 import  AuthLayout from '../components/AuthLayout.vue'
@@ -97,6 +98,11 @@ const routes = [
                 path: '/view/public/home',
                 name: 'HomePublicView',
                 component: HomePublicView
+            },
+            {
+                path: '/view/public/accueil',
+                name: 'AccueilPublic',
+                component: AccueilPublic
             },
             
         ]

@@ -121,7 +121,7 @@ router.beforeEach((to, from, next) => {
         next()
     }
     else if (to.meta.requireAuth && !store.state.user.token){
-        next({name: 'HomePublicView'})
+        next({name: 'AccueilPublic'})
     } else if (store.state.user.token && to.meta.isGuest){
         next({name: 'Dashboard'})
     }

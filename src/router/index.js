@@ -9,6 +9,7 @@ import PublicationsPublicView from '../views/PublicationsPublicView.vue'
 import ProductsPublicView from '../views/ProductsPublicView.vue'
 import HomePublicView from '../views/HomePublicView.vue'
 import AccueilPublic from '../views/AccueilPublic.vue'
+import Administration from '../views/Administration.vue'
 import  Login from '../views/Login.vue'
 import  Register from '../views/Register.vue'
 import  AuthLayout from '../components/AuthLayout.vue'
@@ -64,7 +65,11 @@ const routes = [
                 name: 'ProductView',
                 component: ProductView
             },
-
+            { 
+                path: '/administration',
+                name: 'Administration',
+                component: Administration
+            },
         ]
     },
     {

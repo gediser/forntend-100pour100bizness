@@ -1,3 +1,4 @@
+import { data } from "autoprefixer";
 import {createStore} from "vuex";
 import axiosClient from '../axios'
 
@@ -5,6 +6,7 @@ const store = createStore({
     state: {
         user: {
             data: {},
+            role:'',
             token: sessionStorage.getItem('TOKEN'),
         },
         search:{
@@ -223,7 +225,6 @@ const store = createStore({
         login({ commit }, user){
             return axiosClient.post('/login', user)
                 .then(({data}) => {
-                    console.log("response", data.token, data.user)
                     commit('setUser', data)
                     return data
                 })
@@ -292,6 +293,13 @@ const store = createStore({
         setUser: (state, userData) => {
             state.user.token = userData.token;
             state.user.data = userData.user;
+            state.user.role = 'user'
+            if (userData.user.roles.findIndex(item => item.name === 'admin') >=0){
+                state.user.role = 'admin'
+            }
+            if (userData.user.roles.findIndex(item => item.name === 'manager') >=0){
+                state.user.role = 'manager'
+            }
             sessionStorage.setItem('TOKEN', userData.token)
         },
         setCategories: (state, categories) => {

@@ -1,5 +1,5 @@
 <template>
-   <Carousel class="mb-8" :settings="settings" :breakpoints="breakpoints">
+   <Carousel class="mb-8 juste" :settings="settings" :breakpoints="breakpoints">
     <Slide v-for="slide, index in slides" :key="index">
       <div class="m-2"><img :alt="slide.name" :src="slide.src"/></div>
     </Slide>
@@ -60,5 +60,8 @@ export default defineComponent({
 </script>
 
 <style>
-
+.juste .carousel__next, .juste .carousel__prev{
+  border-radius: 100%;
+  background-color: gray;
+}
 </style>

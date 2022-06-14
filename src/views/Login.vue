@@ -87,15 +87,12 @@ function login(ev){
   ev.preventDefault();
 
   loading.value = true;
-  console.log("Send data")
   store.dispatch('login', user)
     .then(() => {
       loading.value = false;
-      console.log("Start router.")
       router.push({
         name: 'Dashboard'
       })
-      console.log("End router.")
     })
     .catch(err => {
       loading.value = false;

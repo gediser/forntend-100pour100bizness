@@ -54,7 +54,7 @@ const routes = [
             },
             { 
                 path: '/administration',
-                redirect:'/administration/utilisateurs',
+                redirect:'/administration/justepourvous',
                 name: 'Administration',
                 component: ()=>import('../views/Administration.vue'),
                 children:[

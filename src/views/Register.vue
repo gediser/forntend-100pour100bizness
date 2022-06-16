@@ -98,6 +98,7 @@ function register(ev){
     })
     .catch((err)=>{
       loading.value = false;
+      console.log(err, err.response, "error")
       if (err.response.status === 422){
         errors.value = err.response.data.errors
       }

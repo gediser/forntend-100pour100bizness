@@ -60,8 +60,14 @@ export default defineComponent({
 </script>
 
 <style>
-.juste .carousel__next, .juste .carousel__prev{
+.juste .carousel__next, 
+.juste .carousel__prev{
   border-radius: 100%;
   background-color: gray;
+}
+
+.juste  .carousel__prev--in-active,
+.juste  .carousel__next--in-active {
+  display: none;
 }
 </style>

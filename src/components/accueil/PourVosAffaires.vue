@@ -1,5 +1,5 @@
 <template>
-   <Carousel class="mb-8" :settings="settings" :breakpoints="breakpoints">
+   <Carousel class="mb-8 affaires" :settings="settings" :breakpoints="breakpoints">
     <Slide v-for="slide in slides" :key="slide.url">
       <div class="bg-belge text-white p-2 border border-belge hover:text-red-500 hover:scale-110 rounded-md cursor-pointer">{{ slide.name }}</div>
     </Slide>
@@ -55,5 +55,8 @@ export default defineComponent({
 </script>
 
 <style>
-
+.affaires .carousel__next, 
+.affaires .carousel__prev{
+  display:none;
+}
 </style>

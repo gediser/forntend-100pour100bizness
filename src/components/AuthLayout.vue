@@ -47,11 +47,17 @@
           <router-link v-for="item in navigation" :key="item.name" :to="item.to" active-class="bg-cbelge text-white hover:scale-110 hover:text-red-500" :class="[this.$route.name === item.to.name ? '' : 'bg-belge hover:scale-110 text-white hover:text-red-500', 'px-3 py-2 rounded-md text-sm font-medium']" >{{ item.name }}</router-link>
         </div>
           
-          <div>
-              <div class="hover:scale-110 text-white hover:text-red-500">
-                  <router-link :to="{name:'Login'}" active-class="bg-cbelge text-white hover:scale-110 hover:text-red-500" :class="[this.$route.name === 'Login' ? '' : 'bg-belge hover:scale-110 text-white hover:text-red-500', 'px-3 py-2 rounded-md text-sm font-medium']" >Se connecter</router-link>
-              </div>
+          
+        <div class="relative">
+          <svg @click="show" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-belge cursor-pointer hover:scale-110 hover:text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <div v-if="showInMenu" class="absolute w-[200px] top-8 flex flex-col gap-2 right-0 shadow py-1 px-4">
+            <router-link :to="{name:'Login'}" class="bg-belge hover:scale-110 text-white hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium">Se connecter</router-link>
+            <router-link :to="{name:'Register'}" class="bg-belge hover:scale-110 text-white hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium">S'inscrire</router-link>
           </div>
+        </div>
+          
       </div>
 
       <div v-if="this.$store.state.user.token !== null" class="hamburger-menu sm:hidden">
@@ -69,12 +75,16 @@
           <div class="flex flex-wrap items-baseline space-x-4">
                 <router-link v-for="item in navigationAuth" :key="item.name" :to="item.to" active-class="bg-cbelge text-white hover:scale-110 hover:text-red-500" :class="[this.$route.name === item.to.name ? '' : 'bg-belge hover:scale-110 text-white hover:text-red-500', 'px-3 py-2 rounded-md text-sm font-medium']" >{{ item.name }}</router-link>
               </div>
-            
-            <div>
-                <div @click="logout" class="hover:scale-110 text-white hover:text-red-500">
-                    <a href="#" class="bg-belge rounded-lg p-2 ">D&eacute;connexion</a>
-                </div>
+            <div class="relative">
+              <svg @click="show" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-belge cursor-pointer hover:scale-110 hover:text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div v-if="showInMenu" class="absolute w-[200px] top-8 flex flex-col gap-2 right-0 shadow py-1 px-4">
+                <span @click="logout" class="bg-belge hover:scale-110 text-white hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium">D&eacute;connexion</span>
+                <router-link v-if="['manager', 'admin'].includes(this.$store.state.user.role)" :to="{name:'Administration'}" class="bg-belge hover:scale-110 text-white hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium">Administration</router-link>
+              </div>
             </div>
+            
         </div>
 
     </div>
@@ -154,7 +164,7 @@ import {useRouter} from 'vue-router'
 import Notification from './Notification.vue'
 
 const navigation = [
-  { name: 'Accueil', to: {name: "HomePublicView"}, target: false },
+  { name: 'Accueil', to: {name: "AccueilPublic"}, target: false },
   { name: 'Publications', to: {name: "PublicationsPublicView"}, target: false },
   { name: 'Produits', to: {name: "ProductsPublicView"}, target: false },
 ]
@@ -189,7 +199,7 @@ export default {
         router.push({name:"HomePublicView"});
         store.dispatch("searchAll", model.value)
     }
-
+    
     return {
       user: computed(() => store.state.user.data),
       navigation,
@@ -199,6 +209,16 @@ export default {
       model,
     }
   },
+  methods:{
+    show(){
+      this.showInMenu = !this.showInMenu
+    }
+  },
+  data(){
+    return {
+      showInMenu:false
+    }
+  }
 }
 </script>
 

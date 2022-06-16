@@ -60,8 +60,14 @@ export default defineComponent({
 </script>
 
 <style>
-.meilleur .carousel__next, .meilleur .carousel__prev{
+.meilleur .carousel__next, 
+.meilleur .carousel__prev{
   border-radius: 100%;
   background-color: gray;
+}
+
+.meilleur  .carousel__prev--in-active,
+.meilleur  .carousel__next--in-active {
+  display: none;
 }
 </style>

@@ -1,17 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router"
-import  Dashboard from '../views/Dashboard.vue'
-import  Publications from '../views/Publications.vue'
-import  Products from '../views/Products.vue'
-import PublicationView from '../views/PublicationView.vue'
-import ProductView from '../views/ProductView.vue'
-import ProfilView from '../views/ProfilView.vue'
-import PublicationsPublicView from '../views/PublicationsPublicView.vue'
-import ProductsPublicView from '../views/ProductsPublicView.vue'
-import HomePublicView from '../views/HomePublicView.vue'
-import AccueilPublic from '../views/AccueilPublic.vue'
-import Administration from '../views/Administration.vue'
-import  Login from '../views/Login.vue'
-import  Register from '../views/Register.vue'
 import  AuthLayout from '../components/AuthLayout.vue'
 import store from "../store"
 
@@ -28,47 +15,65 @@ const routes = [
             { 
                 path: '/dashboard',
                 name: 'Dashboard',
-                component: Dashboard
+                component: ()=>import('../views/Dashboard.vue')
             },
             { 
                 path: '/publications',
                 name: 'Publications',
-                component: Publications
+                component: ()=>import('../views/Publications.vue')
             },
             { 
                 path: '/publications/create',
                 name: 'PublicationCreate',
-                component: PublicationView
+                component: ()=>import('../views/PublicationView.vue')
             },
             { 
                 path: '/publications/:id',
                 name: 'PublicationView',
-                component: PublicationView
+                component: ()=>import('../views/PublicationView.vue')
             },
             { 
                 path: '/profil',
                 name: 'ProfilView',
-                component: ProfilView
+                component: ()=>import('../views/ProfilView.vue')
             },
             { 
                 path: '/products',
                 name: 'Products',
-                component: Products
+                component: ()=>import('../views/Products.vue')
             },
             { 
                 path: '/products/create',
                 name: 'ProductCreate',
-                component: ProductView
+                component: ()=>import('../views/ProductView.vue')
             },
             { 
                 path: '/products/:id',
                 name: 'ProductView',
-                component: ProductView
+                component: ()=>import('../views/ProductView.vue')
             },
             { 
                 path: '/administration',
+                redirect:'/administration/utilisateurs',
                 name: 'Administration',
-                component: Administration
+                component: ()=>import('../views/Administration.vue'),
+                children:[
+                    { 
+                        path: '/administration/utilisateurs',
+                        name: 'AdminUser',
+                        component: ()=>import('../views/administration/AdminUser.vue')
+                    },
+                    { 
+                        path: '/administration/justepourvous',
+                        name: 'AdminJustForYou',
+                        component: ()=>import('../views/administration/AdminJustForYou.vue')
+                    },
+                    { 
+                        path: '/administration/meilleurclassement',
+                        name: 'AdminBestRanking',
+                        component: ()=>import('../views/administration/AdminBestRanking.vue')
+                    },
+                ]
             },
         ]
     },
@@ -82,32 +87,32 @@ const routes = [
             {
                 path: '/login',
                 name: 'Login',
-                component: Login
+                component: ()=>import('../views/Login.vue')
             },
             {
                 path: '/register',
                 name: 'Register',
-                component: Register
+                component: ()=>import('../views/Register.vue')
             },
             {
                 path: '/view/public/publications',
                 name: 'PublicationsPublicView',
-                component: PublicationsPublicView
+                component: ()=>import('../views/PublicationsPublicView.vue')
             },
             {
                 path: '/view/public/products',
                 name: 'ProductsPublicView',
-                component: ProductsPublicView
+                component: ()=>import('../views/ProductsPublicView.vue')
             },
             {
                 path: '/view/public/home',
                 name: 'HomePublicView',
-                component: HomePublicView
+                component: ()=>import('../views/HomePublicView.vue')
             },
             {
                 path: '/view/public/accueil',
                 name: 'AccueilPublic',
-                component: AccueilPublic
+                component: ()=>import('../views/AccueilPublic.vue')
             },
             
         ]

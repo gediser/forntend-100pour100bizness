@@ -80,8 +80,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <div v-if="showInMenu" class="absolute w-[200px] top-8 flex flex-col gap-2 right-0 shadow py-1 px-4">
-                <span @click="logout" class="bg-belge hover:scale-110 text-white hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium">D&eacute;connexion</span>
                 <router-link v-if="['manager', 'admin'].includes(this.$store.state.user.role)" :to="{name:'Administration'}" class="bg-belge hover:scale-110 text-white hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium">Administration</router-link>
+                <span @click="logout" class="bg-belge hover:scale-110 text-white hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium">D&eacute;connexion</span>
+                
               </div>
             </div>
             

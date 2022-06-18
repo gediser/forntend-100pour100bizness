@@ -22,7 +22,7 @@
       <p>Pas de publications pour la section juste pour vous.</p>
     </div>
     <div class="flex justify-center"> 
-      <button class="w-[50%] text-center bg-belge hover:scale-110 text-white hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium">Confirmer Publications Juste Pour vous</button>
+      <button @click="confirmer" class="w-[50%] text-center bg-belge hover:scale-110 text-white hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium">Confirmer Publications Juste Pour vous</button>
     </div>
     
   </div>
@@ -33,9 +33,22 @@ import axiosClient from '../../axios'
 import store from '../../store'
 
 export default {
+  mounted(){
+    axiosClient.get(`/juste-pour-vous-publications/get-all`)
+        .then(({data}) => {
+          this.juste_pour_vous_publications=this.juste_pour_vous_publications.concat(data.data);
+        })
+  },
   methods:{
     inserer(){
       this.publications = this.publications.trim()
+      const publications_ids = this.publications.split(',')
+      for(let i =0; i< publications_ids.length; i++){
+        if (this.juste_pour_vous_publications.findIndex(item => item.id === parseInt(publications_ids[i])) >= 0){
+          store.commit("notify", {message:"Echec, une publication est deja presente "+publications_ids[i], type:"fail"})
+          return 
+        }
+      }
       if (this.publications.split(',').length + this.juste_pour_vous_publications.length > 10){
         store.commit("notify", {message:"Echec, publications superieures a 10", type:"fail"})
         return;
@@ -49,6 +62,17 @@ export default {
     },
     deletePublication(index){
       this.juste_pour_vous_publications.splice(index, 1)
+    },
+    confirmer(){
+      if (this.juste_pour_vous_publications.length == 0){
+        store.commit('notify', {message:'La selection ne contient pas de publications.', type:'fail'})
+        return;
+      }
+      const publications = this.juste_pour_vous_publications.map(item => ({publication_id:item.id}))
+      axiosClient.post('/juste-pour-vous-publications/save', {publications}).then(()=>{
+        store.commit('notify', {message:'La selection a ete enregistree.', type:'success'})
+      })
+
     }
   },
   data(){

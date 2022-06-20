@@ -53,9 +53,8 @@ export default {
         store.commit("notify", {message:"Echec, publications superieures a 10", type:"fail"})
         return;
       }
-      axiosClient.get(`/juste-pour-vous-publications/get?pubs=${this.publications}`)
+      axiosClient.get(`/publications/get?pubs=${this.publications}`)
         .then(({data}) => {
-          console.log(data, "data")
           this.juste_pour_vous_publications=this.juste_pour_vous_publications.concat(data.data);
           store.commit("notify", {message:"Operation reussie", type:"success"})
         })

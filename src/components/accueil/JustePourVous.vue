@@ -18,24 +18,19 @@ import 'vue3-carousel/dist/carousel.css';
 
 export default defineComponent({
   name: 'Breakpoints',
+  props: ['data'],
   components: {
     Carousel,
     Slide,
     Navigation,
   },
+  computed:{
+    slides(){
+      return this.data.map(item => ({name:'Image', src: item.image_url}))
+    }
+  },
   data: () => ({
-    slides:[
-        {name:"Image", src:'/images/photo-produits.jpg'},
-        {name:"Image", src:'/images/photo-produits.jpg'},
-        {name:"Image", src:'/images/photo-produits.jpg'},
-        {name:"Image", src:'/images/photo-produits.jpg'},
-        {name:"Image", src:'/images/photo-produits.jpg'},
-        {name:"Image", src:'/images/photo-produits.jpg'},
-        {name:"Image", src:'/images/photo-produits.jpg'},
-        {name:"Image", src:'/images/photo-produits.jpg'},
-        {name:"Image", src:'/images/photo-produits.jpg'},
-        {name:"Image", src:'/images/photo-produits.jpg'},
-    ],
+    
     // carousel settings
     settings: {
       itemsToShow: 1.5,

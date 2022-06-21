@@ -7,15 +7,15 @@
             </div>
         </template>
 
-        <div>
+        <div class="pb-16">
             <h2 class="text-xl font-bold text-gray-900 mb-3">Pour vos affaires</h2>
             <pour-vos-affaires></pour-vos-affaires>
 
             <h2 class="text-xl font-bold text-gray-900 mb-3">Meilleur classement</h2>
-            <meilleur-classement :data="meilleurClassementData"></meilleur-classement>
+            <meilleur-classement :meilleur="meilleurClassementData"></meilleur-classement>
 
             <h2 class="text-xl font-bold text-gray-900 mb-3">Juste pour vous</h2>
-            <juste-pour-vous :data="justePourVousData"></juste-pour-vous>
+            <juste-pour-vous :juste="justePourVousData"></juste-pour-vous>
         </div>
     </page-component>
 </template>
@@ -35,9 +35,9 @@ export default {
         PourVosAffaires
     },
     mounted(){
-        axiosClient.get('/home/data').then(({data})=>{
-            this.meilleurClassementData = data.data['meilleurclassement']
-            this.justePourVousData = data.data['justepourvous']
+        axiosClient.get('/home/data').then(({data}) => {
+            this.justePourVousData = data.data["justepourvous"]
+            this.meilleurClassementData = data.data["meilleurclassement"]
         })
     },
     data(){

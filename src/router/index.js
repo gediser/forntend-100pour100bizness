@@ -104,6 +104,11 @@ const routes = [
                 name: 'ProductsPublicView',
                 component: ()=>import('../views/ProductsPublicView.vue')
             },
+            { 
+                path: '/publications/show/:id',
+                name: 'PublicationsShow',
+                component: ()=>import('../views/PublicationsShow.vue')
+            },
             {
                 path: '/view/public/home',
                 name: 'HomePublicView',

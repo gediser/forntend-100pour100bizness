@@ -130,6 +130,15 @@ const store = createStore({
                     commit('setProductsLoading', false)
                 })
         },
+        getPublicationShow({commit}, id){
+            return axiosClient.get(`/publication-get/${id}`)
+                            .then(res=>{
+                                return res
+                            })
+                            .catch((err)=>{
+                                throw err;
+                            })
+        },
         getPublication({commit}, id){
             commit("setCurrentPublicationLoading", true);
             return axiosClient

@@ -1,7 +1,9 @@
 <template>
   <div class="my-slick-juste mb-4">
     <div v-for="slider, index in juste" :key="index">
-      <img alt="Image" class="h-48 w-48" :src="slider.image_url"/>
+      <router-link :to="{name:'PublicationsShow', params:{id:slider.id}}">
+        <img alt="Image" class="h-48 w-48" :src="slider.image_url"/>
+      </router-link>
     </div>
     
   </div>

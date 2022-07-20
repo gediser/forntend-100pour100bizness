@@ -73,6 +73,11 @@ const routes = [
                         name: 'AdminBestRanking',
                         component: ()=>import('../views/administration/AdminBestRanking.vue')
                     },
+                    { 
+                        path: '/administration/publications',
+                        name: 'AdminPublications',
+                        component: ()=>import('../views/administration/AdminPublications.vue')
+                    },
                 ]
             },
         ]

@@ -23,7 +23,7 @@
                     v-for="(pub, ind) in publications.data"
                     :key="pub.id"
                     :publication="pub"
-                    :publique="false"
+                    :publique="'private'"
                     class="opacity-0 animate-fade-in-down"
                     :style="{animationDelay: `${ind*0.1}s`}"
                     @delete="deletePublication(pub)"

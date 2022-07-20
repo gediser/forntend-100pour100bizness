@@ -5,7 +5,10 @@
         <p @click="showDetails(publication.user)" class="cursor-pointer font-bold text-indigo-600 hover:text-indigo-700 py-2">{{ publication.user.name }}</p>
         <img :src="publication.image_url" alt="" class="w-full h-48 object-cover" />
         <div v-html="publication.description" class="overflow-hidden flex-1"></div>
-        <div v-if="!publique" class="flex justify-between items-center mt-3">
+        <div v-if="publique=='admin'" class="mt-3">
+            <button @click="emit('activate', publication)" class="flex py-2 px-4 border border-transparent text-sm rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Activate</button>
+        </div>
+        <div v-if="publique == 'private'" class="flex justify-between items-center mt-3">
             <router-link
                 :to="{name: 'PublicationView', params: {id: publication.id}}"
                 class="flex py-2 px-4 border border-transparent text-sm rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -37,10 +40,10 @@ import store from '../store';
 
 const {survey} = defineProps({
     publication: Object,
-    publique: Boolean
+    publique: String
 })
 
-const emit = defineEmits(['delete'])
+const emit = defineEmits(['activate', 'delete'])
 
 function showDetails(user){
    store.commit("showUserDetailsPopUp", user)

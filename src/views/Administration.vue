@@ -15,6 +15,10 @@
           class="bg-belge hover:scale-110 text-white hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium"
           >Meilleur classement</router-link>
         <router-link 
+          :to="{name:'AdminPublications'}"
+          class="bg-belge hover:scale-110 text-white hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium"
+          >Publications</router-link>
+        <router-link 
           v-if="['manager'].includes(this.$store.state.user.role)"
           :to="{name:'AdminUser'}" 
           class="bg-belge hover:scale-110 text-white hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium"

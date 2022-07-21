@@ -13,6 +13,7 @@
                     class="opacity-0 animate-fade-in-down"
                     :style="{animationDelay: `${ind*0.1}s`}"
                     @activate="activate(pub)"
+                    @desactivate="desactivate(pub)"
                 />
             </div>
             <div class="flex justify-center mt-5">
@@ -72,9 +73,29 @@ export default {
         activate(pub){
             const self = this
             axiosClient.post(`/publication/activate`, {id:pub.id})
-                .then(({data})=>{
-                    self.data = data
-                    console.log("publications", data)
+                .then(()=>{
+                    let updatedData = self.data.data.map(item => {
+                        if (item.id == pub.id){
+                            item.activate = true
+                            return item
+                        }
+                        return item
+                    })
+                    self.data = {...self.data, data:updatedData}
+                })
+        },
+        desactivate(pub){
+            const self = this
+            axiosClient.post(`/publication/desactivate`, {id:pub.id})
+                .then(()=>{
+                    let updatedData = self.data.data.map(item => {
+                        if (item.id == pub.id){
+                            item.activate = false
+                            return item
+                        }
+                        return item
+                    })
+                    self.data = {...self.data, data:updatedData}
                 })
         }
     },

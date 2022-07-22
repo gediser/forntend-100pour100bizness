@@ -9,7 +9,11 @@
             <p>{{ product.prix }} FCFA</p>
         </div>
         <div v-html="product.description" class="overflow-hidden flex-1"></div>
-        <div v-if="!publique" class="flex justify-between items-center mt-3">
+        <div v-if="publique=='admin'" class="mt-3">
+            <button v-if="product.activate" @click="emit('desactivate', product)" class="flex py-2 px-4 border border-transparent text-sm rounded-md text-white bg-red-600 hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-500">D&eacute;sactiver</button>
+            <button v-else @click="emit('activate', product)" class="flex py-2 px-4 border border-transparent text-sm rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Activer</button>
+        </div>
+        <div v-if="publique == 'private'" class="flex justify-between items-center mt-3">
             <router-link
                 :to="{name: 'ProductView', params: {id: product.id}}"
                 class="flex py-2 px-4 border border-transparent text-sm rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -41,10 +45,10 @@ import store from '../store';
 
 const {survey} = defineProps({
     product: Object,
-    publique: Boolean
+    publique: String
 })
 
-const emit = defineEmits(['delete'])
+const emit = defineEmits(['activate', 'desactivate', 'delete'])
 
 function showDetails(user){
    store.commit("showUserDetailsPopUp", user)

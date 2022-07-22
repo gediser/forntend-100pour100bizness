@@ -78,6 +78,11 @@ const routes = [
                         name: 'AdminPublications',
                         component: ()=>import('../views/administration/AdminPublications.vue')
                     },
+                    { 
+                        path: '/administration/products',
+                        name: 'AdminProducts',
+                        component: ()=>import('../views/administration/AdminProducts.vue')
+                    },
                 ]
             },
         ]

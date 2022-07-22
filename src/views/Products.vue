@@ -23,7 +23,7 @@
                     v-for="(prod, ind) in products.data"
                     :key="prod.id"
                     :product="prod"
-                    :publique="false"
+                    :publique="'private'"
                     class="opacity-0 animate-fade-in-down"
                     :style="{animationDelay: `${ind*0.1}s`}"
                     @delete="deleteProduct(prod)"

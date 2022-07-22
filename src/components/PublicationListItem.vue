@@ -6,7 +6,7 @@
         <img :src="publication.image_url" alt="" class="w-full h-48 object-cover" />
         <div v-html="publication.description" class="overflow-hidden flex-1"></div>
         <div v-if="publique=='admin'" class="mt-3">
-            <button v-if="publication.activate || parseInt(publication.activate) > 0" @click="emit('desactivate', publication)" class="flex py-2 px-4 border border-transparent text-sm rounded-md text-white bg-red-600 hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-500">D&eacute;sactiver</button>
+            <button v-if="parseInt(publication.activate) > 0" @click="emit('desactivate', publication)" class="flex py-2 px-4 border border-transparent text-sm rounded-md text-white bg-red-600 hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-500">D&eacute;sactiver</button>
             <button v-else @click="emit('activate', publication)" class="flex py-2 px-4 border border-transparent text-sm rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Activer</button>
         </div>
         <div v-if="publique == 'private'" class="flex justify-between items-center mt-3">

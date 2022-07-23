@@ -76,7 +76,7 @@ export default {
                 .then(()=>{
                     let updatedData = self.data.data.map(item => {
                         if (item.id == prod.id){
-                            item.activate = 1
+                            item.activate = true
                             return item
                         }
                         return item
@@ -90,7 +90,7 @@ export default {
                 .then(()=>{
                     let updatedData = self.data.data.map(item => {
                         if (item.id == prod.id){
-                            item.activate = 0
+                            item.activate = false
                             return item
                         }
                         return item

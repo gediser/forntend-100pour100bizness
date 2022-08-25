@@ -23,6 +23,10 @@
                         <h3 class="font-bold inline">Telephone :&nbsp;</h3>
                         <span>{{userDetailsPopUp.data.telephone}}</span>
                     </div>
+                    <div>
+                        <h3 class="font-bold inline">Ville :&nbsp;</h3>
+                        <span>{{userDetailsPopUp.data.ville}}</span>
+                    </div>
                 </div>
                 <div class="flex justify-center items-center">
                     <button @click="close" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">OKAY</button>

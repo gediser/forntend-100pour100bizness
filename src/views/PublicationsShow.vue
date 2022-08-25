@@ -9,9 +9,10 @@
         </template>
 
         <div v-if="loading" class="text-center">Chargement...</div>
-        <div v-else class="flex pb-48 ">
+        <div v-else class="flex flex-wrap pb-48 ">
             <div class="lg:w-6/12 w-full flex flex-col gap-2 px-4">
                 <img alt="Image publication" :src="image"/> 
+                <hr />
                 <div>
                     <h3 class="font-bold text-indigo-600 hover:text-indigo-700 py-2">Vendeur</h3>
                     <p><span class="font-bold">Nom:</span> {{user.name}}</p>
@@ -20,8 +21,13 @@
                 </div>
             </div>
             <div class="lg:w-6/12 w-full flex flex-col gap-2 px-4">
-                <p class="py-2"><span class="font-bold text-indigo-600 hover:text-indigo-700">Categorie: </span>{{categorie}}</p>
-                <p v-html="description"></p> 
+                <p class="py-2">
+                    <span class="font-bold text-indigo-600 hover:text-indigo-700">Categorie: </span>
+                    <button class="bg-green-500 border border-green-500 p-1 text-white rounded-md">{{categorie}}</button>
+                </p>
+                <p v-html="description">
+                    
+                </p> 
             </div>
         </div>
     </page-component>

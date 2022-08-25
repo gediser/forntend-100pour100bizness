@@ -60,7 +60,8 @@ const store = createStore({
             data: {
                 name: '',
                 email: '',
-                telephone: ''
+                telephone: '',
+                ville: ''
             }
         }
     },
@@ -323,10 +324,11 @@ const store = createStore({
                 state.notification.show = false;
             }, 3000)
         },
-        showUserDetailsPopUp: (state, {name, email, telephone}) =>{
+        showUserDetailsPopUp: (state, {name, email, telephone, ville}) =>{
             state.userDetailsPopUp.data.name = name;
             state.userDetailsPopUp.data.email = email;
             state.userDetailsPopUp.data.telephone = telephone
+            state.userDetailsPopUp.data.ville = ville
             state.userDetailsPopUp.show = true
         },
         closeUserDetailsPopUp: (state) =>{

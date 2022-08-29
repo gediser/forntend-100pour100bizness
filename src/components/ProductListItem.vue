@@ -13,6 +13,7 @@
             <button v-if="product.activate" @click="emit('desactivate', product)" class="flex py-2 px-4 border border-transparent text-sm rounded-md text-white bg-red-600 hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-500">D&eacute;sactiver</button>
             <button v-else @click="emit('activate', product)" class="flex py-2 px-4 border border-transparent text-sm rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Activer</button>
         </div>
+        <div>Publi&eacute; {{  moment(product.created_at).fromNow() }}</div>
         <div v-if="publique == 'private'" class="flex justify-between items-center mt-3">
             <router-link
                 :to="{name: 'ProductView', params: {id: product.id}}"
@@ -40,8 +41,27 @@
 </template>
 
 <script setup>
-
+import moment from 'moment'
 import store from '../store';
+
+moment.locale('fr');
+moment.updateLocale('fr', {
+    relativeTime : {
+        future : 'dans %s',
+        past : 'il y a %s',
+        s : 'quelques secondes',
+        m : 'une minute',
+        mm : '%d minutes',
+        h : 'une heure',
+        hh : '%d heures',
+        d : 'un jour',
+        dd : '%d jours',
+        M : 'un mois',
+        MM : '%d mois',
+        y : 'un an',
+        yy : '%d ans'
+    },
+})
 
 const {survey} = defineProps({
     product: Object,
